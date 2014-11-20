@@ -12,6 +12,7 @@ on_exit cleanup
 foo.foo.foo.foo() {
     local lvl=$1
     local exit_code=$2
+    log.debug "cannot go any deeper ..."
     exit $exit_code
 }
 
@@ -42,9 +43,9 @@ foo() {
     foo.foo $lvl $exit_code
 }
 
-Main() {
+main() {
     local lvl=${1:-0}
-    log_debug "$lvl"
+    log.debug "$lvl"
     local exit_code=${2:-1}
     test $lvl -eq 0 && exit $exit_code
     (( lvl-- ))
@@ -52,8 +53,4 @@ Main() {
 }
 
 
-Main $@
-
-# Local variables:
-# mode: shell-script
-# End:
+main $@
